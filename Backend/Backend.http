@@ -1,6 +1,6 @@
-@Backend_HostAddress = http://localhost:5147
+# Адреса локального API.
+@baseUrl = http://localhost:5000
 
-GET {{Backend_HostAddress}}/weatherforecast/
+### Перевірка роботи сервера
+GET {{baseUrl}}/health
 Accept: application/json
-
-###
