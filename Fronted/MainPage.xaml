@@ -36,7 +36,7 @@
                         FontFamily="OpenSansSemibold"
                         FontSize="30"
                         FontAttributes="Bold"
-                        TextColor="#17233C"
+                        TextColor="#614099"
                         CharacterSpacing="0.5"
                         VerticalOptions="Center" />
 
