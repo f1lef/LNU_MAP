@@ -1,4 +1,7 @@
-﻿namespace Fronted;
+﻿using System;
+using Microsoft.Maui.Controls;
+
+namespace Fronted;
 
 public partial class MainPage : ContentPage
 {
@@ -13,5 +16,10 @@ public partial class MainPage : ContentPage
             "Вхід",
             "Успішний вхід, вітаємо тебе першокурснику!",
             "OK");
+    }
+
+    private async void OnRegisterTapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushModalAsync(new RegisterPage(), false);
     }
 }

@@ -9,7 +9,7 @@
 
     <ScrollView>
         <Grid
-            Padding="24"
+            Padding="29"
             MinimumHeightRequest="700">
 
             <!-- Форма не розтягується на весь екран -->
@@ -25,27 +25,19 @@
                     Spacing="12"
                     Margin="0,0,0,60">
 
-                    <Border
-                        WidthRequest="42"
-                        HeightRequest="42"
-                        BackgroundColor="#315EF4"
-                        StrokeThickness="0">
-
-                        <Label
-                            Text="S"
-                            TextColor="White"
-                            FontSize="22"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-
-                    </Border>
+                    <Image Source="logo.jpg"
+                   WidthRequest="80"
+                   HeightRequest="80"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center" />
 
                     <Label
-                        Text="Squad404"
-                        FontSize="20"
+                        Text="LNU maps"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="30"
                         FontAttributes="Bold"
                         TextColor="#17233C"
+                        CharacterSpacing="0.5"
                         VerticalOptions="Center" />
 
                 </HorizontalStackLayout>
@@ -78,6 +70,7 @@
                     BackgroundColor="White"
                     Stroke="#D9E0EB"
                     StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
                     HeightRequest="56">
 
                     <Entry
@@ -114,6 +107,7 @@
                     BackgroundColor="White"
                     Stroke="#D9E0EB"
                     StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
                     HeightRequest="56">
 
                     <Entry
@@ -154,12 +148,38 @@
                     Margin="0,48,0,0"
                     HeightRequest="56"
                     CornerRadius="12"
-                    BackgroundColor="#315EF4"
+                    BackgroundColor="#614099"
                     TextColor="White"
                     FontSize="16"
                     FontAttributes="Bold"
                     Clicked="OnLoginClicked" />
+                
+                <!-- Посилання на реєстрацію -->
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    Margin="0,20,0,0"
+                    Spacing="5">
 
+                                    <Label
+                        Text="Немає акаунта?"
+                        FontSize="14"
+                        TextColor="#75839D"
+                        VerticalOptions="Center" />
+
+                                    <Label
+                        Text="Зареєструватися"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        TextColor="#614099"
+                        TextDecorations="Underline"
+                        VerticalOptions="Center">
+
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRegisterTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </HorizontalStackLayout>
 
                 <!-- LOADING -->
                 <ActivityIndicator
