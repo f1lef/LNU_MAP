@@ -42,10 +42,10 @@
     <ScrollView>
         <Grid Padding="24">
             <VerticalStackLayout
-                MaximumWidthRequest="400"
+               
                 HorizontalOptions="Fill"
-                Spacing="8"
-                Margin="0,24,0,24">
+                VerticalOptions="Center"
+                Spacing="0">
 
                 <HorizontalStackLayout
                     Spacing="12"

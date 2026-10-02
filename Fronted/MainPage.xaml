@@ -8,17 +8,13 @@
     Shell.NavBarIsVisible="False">
 
     <ScrollView>
-        <Grid
-            Padding="29"
-            MinimumHeightRequest="700">
+        <Grid Padding="29">
 
-            <!-- Форма не розтягується на весь екран -->
+            <!-- Форма розтягується на стільки скільки дозволяє екран.-->
             <VerticalStackLayout
-                MaximumWidthRequest="420"
-                WidthRequest="390"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Spacing="0">
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Spacing="0">    
 
                 <!-- LOGO -->
                 <HorizontalStackLayout
