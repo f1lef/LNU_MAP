@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android</TargetFrameworks>
@@ -71,12 +71,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Splashpage.xaml.cs">
+	    <DependentUpon>Splashpage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="RegisterPage.xaml.cs">
 	    <DependentUpon>RegisterPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Splashpage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

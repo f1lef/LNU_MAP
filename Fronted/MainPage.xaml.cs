@@ -39,7 +39,7 @@ public partial class MainPage : ContentPage
                 pageContent.TranslationX = 0;
             });
     }
-    private async void OnLoginClicked(object sender, EventArgs e)
+    private async void OnLoginClicked(object? sender, EventArgs e)
     {
         await DisplayAlertAsync(
             "Вхід",
@@ -47,7 +47,7 @@ public partial class MainPage : ContentPage
             "OK");
     }
 
-    private async void OnRegisterTapped(object sender, TappedEventArgs e)
+    private async void OnRegisterTapped(object? sender, TappedEventArgs e)
     {
         await Navigation.PushModalAsync(new RegisterPage(), false);
     }

@@ -40,7 +40,7 @@ public partial class RegisterPage : ContentPage
             });
     }
     private async void OnBackToLoginTapped(
-        object sender, TappedEventArgs e)
+        object? sender, TappedEventArgs e)
     {
         await Navigation.PopModalAsync();
     }
