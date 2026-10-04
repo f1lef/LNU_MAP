@@ -1,152 +1,267 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Fronted.RegisterPage"
-    Title="Реєстрація"
-    BackgroundColor="#F5F7FC"
+    x:Class="Fronted.MainPage"
+    BackgroundColor="#F6F8FC"
     Shell.NavBarIsVisible="False">
 
-    <!-- Стилі цієї сторінки -->
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <Style TargetType="Entry">
-                <Setter Property="FontSize" Value="15" />
-                <Setter Property="TextColor" Value="#25314A" />
-                <Setter Property="PlaceholderColor" Value="#9AA6B8" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
-            </Style>
-
-            <Style TargetType="Border">
-                <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="Stroke" Value="#E1E6F0" />
-                <Setter Property="StrokeThickness" Value="1" />
-                <Setter Property="HeightRequest" Value="56" />
-                <Setter Property="Padding" Value="12,0" />
-            </Style>
-
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#614099" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="CornerRadius" Value="14" />
-                <Setter Property="HeightRequest" Value="56" />
-            </Style>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <!-- Вміст сторінки -->
     <ScrollView>
-        <Grid Padding="24">
-            <VerticalStackLayout
-               
-                HorizontalOptions="Fill"
-                VerticalOptions="Center"
-                Spacing="0">
+        <VerticalStackLayout Spacing="0">
 
-                <HorizontalStackLayout
-                    Spacing="12"
-                    Margin="0,0,0,24">
+            <!-- ===== ШАПКА З МАПОЮ ===== -->
+            <Grid HeightRequest="210" IsClippedToBounds="True">
 
-                    <Image
-                        Source="logo.jpg"
-                        WidthRequest="64"
-                        HeightRequest="64"
-                        Aspect="AspectFit" />
+                <!-- вулиці -->
+                <Path Stroke="#E4DBF2" StrokeThickness="7" StrokeLineCap="Round"
+                      Data="M0,80 C80,60 140,105 220,88 S340,50 360,64"/>
+                <Path Stroke="#E4DBF2" StrokeThickness="7" StrokeLineCap="Round"
+                      Data="M0,150 C60,132 125,175 200,152 S330,130 360,142"/>
+                <Path Stroke="#E4DBF2" StrokeThickness="7" StrokeLineCap="Round"
+                      Data="M60,0 C68,60 50,130 72,210"/>
+                <Path Stroke="#E4DBF2" StrokeThickness="7" StrokeLineCap="Round"
+                      Data="M180,0 C172,70 200,135 182,210"/>
+                <Path Stroke="#E4DBF2" StrokeThickness="7" StrokeLineCap="Round"
+                      Data="M290,0 C298,60 280,130 300,210"/>
 
+                <!-- маршрут (штрихи з круглими кінцями = крапки) -->
+                <Path Stroke="#614099" StrokeThickness="3" StrokeLineCap="Round" StrokeDashArray="0.3,3"
+                      Data="M30,135 C85,135 105,98 155,100 S230,124 270,94 S298,80 300,78"/>
+                <Path Fill="#614099" Data="M25,135 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0"/>
+
+                <!-- мітка -->
+                <Path Fill="#E39B2D"
+                      Data="M300,46 c-12,0 -21,9 -21,20 0,15 21,36 21,36 s21,-21 21,-36 c0,-11 -9,-20 -21,-20 z"/>
+                <Path Fill="#F6F8FC" Data="M293,66 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0"/>
+
+                <!-- плавний перехід у фон сторінки -->
+                <BoxView VerticalOptions="End" HeightRequest="64">
+                    <BoxView.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="#00F6F8FC"/>
+                            <GradientStop Offset="1" Color="#F6F8FC"/>
+                        </LinearGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+
+                <!-- LOGO: намальований, тому без білого квадрата.
+                     Якщо потрібен ваш файл, замініть Border на
+                     <Image Source="logo.png" WidthRequest="32" HeightRequest="32"/>
+                     (PNG/SVG з прозорим фоном, не JPG). -->
+                <HorizontalStackLayout Margin="24,22,0,0" Spacing="10"
+                                       VerticalOptions="Start" HorizontalOptions="Start">
+                    <Border WidthRequest="32" HeightRequest="32" StrokeThickness="0"
+                            BackgroundColor="#614099"
+                            StrokeShape="RoundRectangle 10">
+                        <Grid>
+                            <Path Aspect="Uniform" WidthRequest="18" HeightRequest="22"
+                                  HorizontalOptions="Center" VerticalOptions="Center"
+                                  Fill="White"
+                                  Data="M17,6.5 c-4.4,0 -8,3.3 -8,7.5 0,5.4 8,13.5 8,13.5 s8,-8.1 8,-13.5 c0,-4.2 -3.6,-7.5 -8,-7.5 z"/>
+                            <Path Aspect="Uniform" WidthRequest="12" HeightRequest="5"
+                                  HorizontalOptions="Center" VerticalOptions="Center" Margin="0,2,0,0"
+                                  Fill="#614099"
+                                  Data="M11.5,14.2 c1.6,-1.5 3.6,-0.7 5.5,0.3 1.9,-1 3.9,-1.8 5.5,-0.3 -1.3,2.2 -3.7,1.2 -5.5,0.1 -1.8,1.1 -4.2,2.1 -5.5,-0.1 z"/>
+                        </Grid>
+                    </Border>
                     <Label
                         Text="LNU maps"
                         FontFamily="OpenSansSemibold"
-                        FontSize="30"
-                        TextColor="#614099"
+                        FontSize="18"
+                        TextColor="#17233C"
                         VerticalOptions="Center" />
-
                 </HorizontalStackLayout>
+            </Grid>
+
+
+            <!-- ===== ФОРМА ===== -->
+            <VerticalStackLayout Padding="24,0,24,28" Spacing="0">
+
+                <!-- TITLE -->
+                <Label
+                    Text="Вхід"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="36"
+                    TextColor="#17233C"
+                    SemanticProperties.HeadingLevel="Level1" />
 
                 <Label
-                    Text="Створити акаунт"
-                    FontSize="30"
-                    FontAttributes="Bold"
-                    TextColor="#17233C" />
+                    Text="Розклад і маршрут до аудиторії — в одному місці."
+                    Margin="0,8,0,32"
+                    FontSize="15"
+                    TextColor="#5B677D" />
 
-                <Label
-                    Text="Зареєструйтеся, щоб переглядати свій розклад."
-                    FontSize="14"
-                    TextColor="#75839D"
-                    Margin="0,0,0,16" />
 
+                <!-- EMAIL -->
                 <Label
                     Text="Електронна пошта"
+                    FontSize="15"
                     FontAttributes="Bold"
-                    TextColor="#25314A" />
+                    TextColor="#25314A"
+                    Margin="0,0,0,8" />
 
-                <Border StrokeShape="RoundRectangle 14">
+                <Border
+                    x:Name="EmailBorder"
+                    BackgroundColor="White"
+                    Stroke="#B9C3D4"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 14"
+                    HeightRequest="56">
+
+                    <!-- фіолетова рамка у фокусі -->
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Value="True"
+                                     Binding="{Binding Source={x:Reference EmailEntry}, Path=IsFocused}">
+                            <Setter Property="Stroke" Value="#614099" />
+                        </DataTrigger>
+                    </Border.Triggers>
+
                     <Entry
-                        x:Name="RegisterEmailEntry"
-                        Placeholder="Введіть електронну пошту"
-                        Keyboard="Email" />
+                        x:Name="EmailEntry"
+                        Placeholder="name@lnu.edu.ua"
+                        PlaceholderColor="#6F7C93"
+                        TextColor="#25314A"
+                        FontSize="16"
+                        Keyboard="Email"
+                        Margin="16,0"
+                        BackgroundColor="Transparent"
+                        SemanticProperties.Hint="Електронна пошта" />
+
                 </Border>
 
+                <Label
+                    x:Name="EmailErrorLabel"
+                    Text="Введіть електронну пошту"
+                    FontSize="13"
+                    TextColor="#C42338"
+                    Margin="0,6,0,0"
+                    IsVisible="False" />
+
+
+                <!-- PASSWORD -->
                 <Label
                     Text="Пароль"
+                    FontSize="15"
                     FontAttributes="Bold"
                     TextColor="#25314A"
-                    Margin="0,12,0,0" />
+                    Margin="0,20,0,8" />
 
-                <Border StrokeShape="RoundRectangle 14">
-                    <Entry
-                        x:Name="RegisterPasswordEntry"
-                        Placeholder="Введіть пароль"
-                        IsPassword="True" />
+                <Border
+                    x:Name="PasswordBorder"
+                    BackgroundColor="White"
+                    Stroke="#B9C3D4"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 14"
+                    HeightRequest="56">
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border" Value="True"
+                                     Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsFocused}">
+                            <Setter Property="Stroke" Value="#614099" />
+                        </DataTrigger>
+                    </Border.Triggers>
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Placeholder="Ваш пароль"
+                            PlaceholderColor="#6F7C93"
+                            TextColor="#25314A"
+                            FontSize="16"
+                            Margin="16,0,0,0"
+                            IsPassword="True"
+                            BackgroundColor="Transparent"
+                            SemanticProperties.Hint="Пароль" />
+
+                        <!-- показати / сховати пароль (потрібен обробник OnTogglePasswordTapped) -->
+                        <Label
+                            x:Name="TogglePasswordLabel"
+                            Grid.Column="1"
+                            Text="Показати"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#614099"
+                            Padding="14,0"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTogglePasswordTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </Grid>
                 </Border>
 
                 <Label
-                    Text="Повторіть пароль"
-                    FontAttributes="Bold"
-                    TextColor="#25314A"
-                    Margin="0,12,0,0" />
+                    x:Name="PasswordErrorLabel"
+                    Text="Введіть пароль"
+                    FontSize="13"
+                    TextColor="#C42338"
+                    Margin="0,6,0,0"
+                    IsVisible="False" />
 
-                <Border StrokeShape="RoundRectangle 14">
-                    <Entry
-                        x:Name="RegisterConfirmPasswordEntry"
-                        Placeholder="Введіть пароль ще раз"
-                        IsPassword="True" />
-                </Border>
 
+                <!-- ERROR -->
+                <Label
+                    x:Name="LoginErrorLabel"
+                    Text="Неправильна електронна пошта або пароль."
+                    TextColor="#C42338"
+                    FontSize="14"
+                    Margin="0,16,0,0"
+                    IsVisible="False" />
+
+
+                <!-- BUTTON -->
                 <Button
-                    x:Name="RegisterButton"
-                    Text="Зареєструватися"
-                    Margin="0,24,0,0" />
+                    x:Name="LoginButton"
+                    Text="Увійти"
+                    Margin="0,28,0,0"
+                    HeightRequest="56"
+                    CornerRadius="14"
+                    BackgroundColor="#614099"
+                    TextColor="White"
+                    FontSize="17"
+                    FontAttributes="Bold"
+                    Clicked="OnLoginClicked" />
 
+                <!-- LOADING -->
+                <ActivityIndicator
+                    x:Name="LoadingIndicator"
+                    Margin="0,16,0,0"
+                    Color="#614099"
+                    IsVisible="False"
+                    IsRunning="False" />
+
+                <!-- Посилання на реєстрацію -->
                 <HorizontalStackLayout
                     HorizontalOptions="Center"
-                    Spacing="5"
-                    Margin="0,16,0,0">
+                    Margin="0,12,0,0"
+                    Spacing="2">
 
                     <Label
-                        Text="Вже маєш акаунт?"
-                        FontSize="14"
-                        TextColor="#75839D" />
+                        Text="Немає акаунта?"
+                        FontSize="15"
+                        TextColor="#5B677D"
+                        VerticalOptions="Center" />
 
                     <Label
-                        Text="Увійти"
-                        FontSize="14"
+                        Text="Зареєструватися"
+                        FontSize="15"
                         FontAttributes="Bold"
                         TextColor="#614099"
-                        TextDecorations="Underline">
+                        Padding="6,10"
+                        VerticalOptions="Center">
 
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Tapped="OnBackToLoginTapped" />
+                            <TapGestureRecognizer Tapped="OnRegisterTapped" />
                         </Label.GestureRecognizers>
-
                     </Label>
+
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
-        </Grid>
+        </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>
