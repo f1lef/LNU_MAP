@@ -3,191 +3,293 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:map="clr-namespace:Fronted"
     x:Class="Fronted.MainPage"
-    BackgroundColor="#F6F8FC"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#140F24">
 
-    <ScrollView>
-        <Grid Padding="29">
+    <Grid>
+        <ScrollView
+            x:Name="LoginScrollView"
+            BackgroundColor="Transparent"
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never">
 
-            <!-- Форма розтягується на стільки скільки дозволяє екран.-->
-            <VerticalStackLayout
-            HorizontalOptions="Fill"
-            VerticalOptions="Center"
-            Spacing="0">    
+            <Grid
+                MinimumHeightRequest="{Binding Height, Source={x:Reference LoginScrollView}}"
+                BackgroundColor="Transparent">
 
-                <!-- LOGO -->
-                <HorizontalStackLayout
-                    Spacing="12"
-                    Margin="0,0,0,60">
+                <Grid.Padding>
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Default="24,24,24,32">
 
-                    <Image Source="logo.jpg"
-                   WidthRequest="80"
-                   HeightRequest="80"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
+                        <On Platform="WinUI" Value="32" />
+                    </OnPlatform>
+                </Grid.Padding>
 
-                    <Label
-                        Text="LNU maps"
-                        FontFamily="OpenSansSemibold"
-                        FontSize="30"
-                        FontAttributes="Bold"
-                        TextColor="#614099"
-                        CharacterSpacing="0.5"
-                        VerticalOptions="Center" />
+                <map:ResponsiveLoginLayout
+                    HorizontalOptions="Fill">
 
-                </HorizontalStackLayout>
+                    <map:ResponsiveLoginLayout.VerticalOptions>
+                        <OnPlatform
+                            x:TypeArguments="LayoutOptions"
+                            Default="Start">
 
+                            <On Platform="WinUI" Value="Center" />
+                        </OnPlatform>
+                    </map:ResponsiveLoginLayout.VerticalOptions>
 
-                <!-- TITLE -->
-                <Label
-                    Text="Вхід у застосунок"
-                    FontSize="32"
-                    FontAttributes="Bold"
-                    TextColor="#17233C" />
+                    <!-- ЛОГО ТА АНІМОВАНА КАРТА -->
+                    <Grid Grid.Row="0" HeightRequest="228">
 
-                <Label
-                    Text="Увійдіть, щоб переглядати свій розклад."
-                    Margin="0,8,0,48"
-                    FontSize="14"
-                    TextColor="#748198" />
+                        <map:AnimatedMapBackground
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            MapZoom="1.20"
+                            InputTransparent="True" />
 
+                        <Border
+                            StrokeThickness="0"
+                            InputTransparent="True">
 
-                <!-- EMAIL -->
-                <Label
-                    Text="Електронна пошта"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#25314A"
-                    Margin="0,0,0,8" />
+                            <Border.Background>
+                                <LinearGradientBrush
+                                    StartPoint="0,0"
+                                    EndPoint="0,1">
 
-                <Border
-                    x:Name="EmailBorder"
-                    BackgroundColor="White"
-                    Stroke="#D9E0EB"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16"
-                    HeightRequest="56">
+                                    <GradientStop
+                                        Color="#00140F24"
+                                        Offset="0" />
 
-                    <Entry
-                        x:Name="EmailEntry"
-                        Placeholder="Введіть електронну пошту"
-                        PlaceholderColor="#9AA6B8"
-                        TextColor="#25314A"
-                        FontSize="15"
-                        Keyboard="Email"
-                        Margin="12,0"
-                        BackgroundColor="Transparent" />
+                                    <GradientStop
+                                        Color="#00140F24"
+                                        Offset="0.68" />
 
-                </Border>
+                                    <GradientStop
+                                        Color="#FF140F24"
+                                        Offset="1" />
 
-                <Label
-                    x:Name="EmailErrorLabel"
-                    Text="Введіть електронну пошту"
-                    FontSize="12"
-                    TextColor="#D93045"
-                    Margin="0,6,0,0"
-                    IsVisible="False" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
 
+                        <Grid
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="12"
+                            VerticalOptions="Start"
+                            Margin="0,4,0,0">
 
-                <!-- PASSWORD -->
-                <Label
-                    Text="Пароль"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    TextColor="#25314A"
-                    Margin="0,24,0,8" />
+                            <Border
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 14"
+                                BackgroundColor="White"
+                                Padding="2">
 
-                <Border
-                    x:Name="PasswordBorder"
-                    BackgroundColor="White"
-                    Stroke="#D9E0EB"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 16"
-                    HeightRequest="56">
+                                <Border.WidthRequest>
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="52">
 
-                    <Entry
-                        x:Name="PasswordEntry"
-                        Placeholder="Введіть пароль"
-                        PlaceholderColor="#9AA6B8"
-                        TextColor="#25314A"
-                        FontSize="15"
-                        Margin="12,0"
-                        IsPassword="True"
-                        BackgroundColor="Transparent" />
+                                        <On Platform="WinUI" Value="72" />
+                                    </OnPlatform>
+                                </Border.WidthRequest>
 
-                </Border>
+                                <Border.HeightRequest>
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="52">
 
-                <Label
-                    x:Name="PasswordErrorLabel"
-                    Text="Введіть пароль"
-                    FontSize="12"
-                    TextColor="#D93045"
-                    Margin="0,6,0,0"
-                    IsVisible="False" />
+                                        <On Platform="WinUI" Value="72" />
+                                    </OnPlatform>
+                                </Border.HeightRequest>
 
+                                <Image
+                                    Source="logo.jpg"
+                                    Aspect="AspectFit" />
 
-                <!-- ERROR -->
-                <Label
-                    x:Name="LoginErrorLabel"
-                    Text="Неправильна електронна пошта або пароль."
-                    TextColor="#D93045"
-                    FontSize="13"
-                    Margin="0,20,0,0"
-                    IsVisible="False" />
+                            </Border>
 
+                            <Label
+                                Grid.Column="1"
+                                Text="LNU maps"
+                                FontFamily="OpenSansSemibold"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                CharacterSpacing="0.3"
+                                VerticalOptions="Center">
 
-                <!-- BUTTON -->
-                <Button
-                    x:Name="LoginButton"
-                    Text="Увійти"
-                    Margin="0,48,0,0"
-                    HeightRequest="56"
-                    CornerRadius="12"
-                    BackgroundColor="#614099"
-                    TextColor="White"
-                    FontSize="16"
-                    FontAttributes="Bold"
-                    Clicked="OnLoginClicked" />
-                
-                <!-- Посилання на реєстрацію -->
-                <HorizontalStackLayout
-                    HorizontalOptions="Center"
-                    Margin="0,20,0,0"
-                    Spacing="5">
+                                <Label.FontSize>
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="24">
 
-                                    <Label
-                        Text="Немає акаунта?"
-                        FontSize="14"
-                        TextColor="#75839D"
-                        VerticalOptions="Center" />
+                                        <On Platform="WinUI" Value="28" />
+                                    </OnPlatform>
+                                </Label.FontSize>
 
-                                    <Label
-                        Text="Зареєструватися"
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        TextColor="#614099"
-                        TextDecorations="Underline"
-                        VerticalOptions="Center">
+                            </Label>
+                        </Grid>
+                    </Grid>
 
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnRegisterTapped" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                    <!-- ФОРМА ВХОДУ -->
+                    <Border
+                        Grid.Row="1"
+                        StrokeThickness="0"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 24"
+                        BackgroundColor="Transparent">
 
-                </HorizontalStackLayout>
+                        <VerticalStackLayout Spacing="0">
 
-                <!-- LOADING -->
-                <ActivityIndicator
-                    x:Name="LoadingIndicator"
-                    Margin="0,15,0,0"
-                    Color="#315EF4"
-                    IsVisible="False"
-                    IsRunning="False" />
+                            <Label
+                                Text="Вхід"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="40"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,6,0,0" />
 
-            </VerticalStackLayout>
+                            <Label
+                                Text="Розклад і маршрут до аудиторії — в одному місці."
+                                FontSize="15"
+                                TextColor="#C4BDCF"
+                                LineBreakMode="WordWrap"
+                                Margin="0,8,0,30" />
 
-        </Grid>
-    </ScrollView>
+                            <Label
+                                Text="Електронна пошта"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,0,0,8" />
 
+                            <Border
+                                x:Name="EmailBorder"
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
+                                <Entry
+                                    x:Name="EmailEntry"
+                                    Placeholder="name@lnu.edu.ua"
+                                    PlaceholderColor="#B8AFC6"
+                                    TextColor="White"
+                                    FontSize="15"
+                                    Keyboard="Email"
+                                    Margin="14,0"
+                                    BackgroundColor="Transparent" />
+
+                            </Border>
+
+                            <Label
+                                x:Name="EmailErrorLabel"
+                                Text="Введіть електронну пошту"
+                                FontSize="12"
+                                TextColor="#FF8B9A"
+                                Margin="0,6,0,0"
+                                IsVisible="False" />
+
+                            <Label
+                                Text="Пароль"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,22,0,8" />
+
+                            <Border
+                                x:Name="PasswordBorder"
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
+                                <Entry
+                                    x:Name="PasswordEntry"
+                                    Placeholder="Ваш пароль"
+                                    PlaceholderColor="#B8AFC6"
+                                    TextColor="White"
+                                    FontSize="15"
+                                    Margin="14,0"
+                                    IsPassword="True"
+                                    BackgroundColor="Transparent" />
+
+                            </Border>
+
+                            <Label
+                                x:Name="PasswordErrorLabel"
+                                Text="Введіть пароль"
+                                FontSize="12"
+                                TextColor="#FF8B9A"
+                                Margin="0,6,0,0"
+                                IsVisible="False" />
+
+                            <Label
+                                x:Name="LoginErrorLabel"
+                                Text="Неправильна електронна пошта або пароль."
+                                TextColor="#FF8B9A"
+                                FontSize="13"
+                                Margin="0,18,0,0"
+                                IsVisible="False" />
+
+                            <Button
+                                x:Name="LoginButton"
+                                Text="Увійти"
+                                Margin="0,28,0,0"
+                                HeightRequest="56"
+                                CornerRadius="16"
+                                BackgroundColor="White"
+                                BorderColor="White"
+                                TextColor="#140F24"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Clicked="OnLoginClicked" />
+
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                ColumnSpacing="6"
+                                Margin="0,20,0,0">
+
+                                <Label
+                                    Text="Немає акаунта?"
+                                    FontSize="13"
+                                    TextColor="#C4BDCF"
+                                    HorizontalTextAlignment="End"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="Зареєструватися"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    TextDecorations="Underline"
+                                    LineBreakMode="WordWrap"
+                                    VerticalOptions="Center">
+
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="OnRegisterTapped" />
+                                    </Label.GestureRecognizers>
+
+                                </Label>
+                            </Grid>
+
+                            <ActivityIndicator
+                                x:Name="LoadingIndicator"
+                                Margin="0,16,0,0"
+                                Color="White"
+                                IsVisible="False"
+                                IsRunning="False" />
+
+                        </VerticalStackLayout>
+                    </Border>
+
+                </map:ResponsiveLoginLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>
