@@ -6,30 +6,32 @@
     x:Class="Fronted.RegisterPage"
     Title="Реєстрація"
     Shell.NavBarIsVisible="False"
-    BackgroundColor="#140F24">
+    BackgroundColor="#140F24"
+    Padding="0">
 
-    <Grid>
+    <ContentPage.Behaviors>
+        <map:AuthPageAppearance />
+    </ContentPage.Behaviors>
+
+    <Grid BackgroundColor="#140F24"
+          HorizontalOptions="Fill" VerticalOptions="Fill">
         <ScrollView x:Name="RegisterScrollView"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#140F24"
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
                     HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
 
-            <!-- Мінімальна висота дозволяє центрувати екран на Windows. -->
+            <!-- Темне тло заповнює всю висоту, вміст починається згори. -->
             <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference RegisterScrollView}}"
                   BackgroundColor="Transparent">
                 <Grid.Padding>
-                    <OnPlatform x:TypeArguments="Thickness" Default="24,24,24,32">
-                        <On Platform="WinUI" Value="32" />
+                    <OnPlatform x:TypeArguments="Thickness" Default="24,12,24,32">
+                        <On Platform="WinUI" Value="32,12,32,32" />
                     </OnPlatform>
                 </Grid.Padding>
 
                 <map:ResponsiveLoginLayout
-                    HorizontalOptions="Fill">
-                    <map:ResponsiveLoginLayout.VerticalOptions>
-                        <OnPlatform x:TypeArguments="LayoutOptions" Default="Start">
-                            <On Platform="WinUI" Value="Center" />
-                        </OnPlatform>
-                    </map:ResponsiveLoginLayout.VerticalOptions>
+                    HorizontalOptions="Fill" VerticalOptions="Start">
 
                     <Grid HeightRequest="228" Grid.Row="0">
                         <map:AnimatedRegistrationBackground
@@ -52,7 +54,7 @@
                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"
                               VerticalOptions="Start" Margin="0,4,0,0">
                             <Border StrokeThickness="0" StrokeShape="RoundRectangle 14"
-                                    BackgroundColor="White" Padding="2">
+                                    BackgroundColor="Transparent" Padding="0">
                                 <Border.WidthRequest>
                                     <OnPlatform x:TypeArguments="x:Double" Default="52">
                                         <On Platform="WinUI" Value="72" />
@@ -63,7 +65,7 @@
                                         <On Platform="WinUI" Value="72" />
                                     </OnPlatform>
                                 </Border.HeightRequest>
-                                <Image Source="logo.jpg" Aspect="AspectFit" />
+                                <Image Source="logo_transparent.png" Aspect="AspectFit" />
                             </Border>
                             <Label Grid.Column="1" Text="LNU maps"
                                    FontFamily="OpenSansSemibold"
@@ -91,7 +93,23 @@
                                    Margin="0,6,0,0" />
                             <Label Text="Зареєструйтеся, щоб переглядати свій розклад."
                                    FontSize="15" TextColor="#C4BDCF"
-                                   LineBreakMode="WordWrap" Margin="0,8,0,30" />
+                                   LineBreakMode="WordWrap" Margin="0,8,0,12" />
+
+                            <!-- Спільний логотип реагує на всі поля реєстрації. -->
+                            <map:AnimatedLoginLogo LogoSource="logo_transparent.png"
+                                IsRegistrationAnimation="True"
+                                WidthRequest="200" HeightRequest="150"
+                                HorizontalOptions="Center" Margin="0,0,0,8"
+                                EmailLength="{Binding Text.Length, Source={x:Reference RegisterEmailEntry}, FallbackValue=0, TargetNullValue=0}"
+                                GroupLength="{Binding Text.Length, Source={x:Reference RegisterGroupEntry}, FallbackValue=0, TargetNullValue=0}"
+                                PasswordLength="{Binding Text.Length, Source={x:Reference RegisterPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+                                ConfirmPasswordLength="{Binding Text.Length, Source={x:Reference RegisterConfirmPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+                                IsEmailFocused="{Binding IsFocused, Source={x:Reference RegisterEmailEntry}}"
+                                IsGroupFocused="{Binding IsFocused, Source={x:Reference RegisterGroupEntry}}"
+                                IsPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterPasswordEntry}}"
+                                IsConfirmPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterConfirmPasswordEntry}}"
+                                IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}}"
+                                IsConfirmPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}}" />
 
                             <Label Text="Електронна пошта" FontSize="14"
                                    FontAttributes="Bold" TextColor="White"
@@ -123,11 +141,16 @@
                             <Border BackgroundColor="#211A33" Stroke="#5D4B79"
                                     StrokeThickness="1" StrokeShape="RoundRectangle 16"
                                     HeightRequest="56">
-                                <Entry x:Name="RegisterPasswordEntry"
-                                       Placeholder="Введіть пароль"
-                                       PlaceholderColor="#B8AFC6" TextColor="White"
-                                       FontSize="15" Margin="14,0" IsPassword="True"
-                                       BackgroundColor="Transparent" />
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry x:Name="RegisterPasswordEntry"
+                                           Placeholder="Введіть пароль"
+                                           PlaceholderColor="#B8AFC6" TextColor="White"
+                                           FontSize="15" Margin="14,0" IsPassword="True"
+                                           BackgroundColor="Transparent" />
+                                    <map:PasswordRevealButton Grid.Column="1"
+                                        HeightRequest="44" Margin="0,6,8,6"
+                                        IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}, Mode=TwoWay}" />
+                                </Grid>
                             </Border>
 
                             <Label Text="Повторіть пароль" FontSize="14"
@@ -136,11 +159,16 @@
                             <Border BackgroundColor="#211A33" Stroke="#5D4B79"
                                     StrokeThickness="1" StrokeShape="RoundRectangle 16"
                                     HeightRequest="56">
-                                <Entry x:Name="RegisterConfirmPasswordEntry"
-                                       Placeholder="Введіть пароль ще раз"
-                                       PlaceholderColor="#B8AFC6" TextColor="White"
-                                       FontSize="15" Margin="14,0" IsPassword="True"
-                                       BackgroundColor="Transparent" />
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry x:Name="RegisterConfirmPasswordEntry"
+                                           Placeholder="Введіть пароль ще раз"
+                                           PlaceholderColor="#B8AFC6" TextColor="White"
+                                           FontSize="15" Margin="14,0" IsPassword="True"
+                                           BackgroundColor="Transparent" />
+                                    <map:PasswordRevealButton Grid.Column="1"
+                                        HeightRequest="44" Margin="0,6,8,6"
+                                        IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}, Mode=TwoWay}" />
+                                </Grid>
                             </Border>
 
                             <Button x:Name="RegisterButton" Text="Зареєструватися"

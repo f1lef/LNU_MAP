@@ -14,7 +14,7 @@
 
             <!-- Логотип -->
             <Image x:Name="LogoImage"
-                   Source="logo.jpg"
+                   Source="logo_transparent.png"
                    WidthRequest="160"
                    HeightRequest="160"
                    Aspect="AspectFit"
