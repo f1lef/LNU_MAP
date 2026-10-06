@@ -1,10 +1,14 @@
-﻿namespace Backend.Models;
+﻿namespace Backend.Data.Entities;
 
 public class RegisterRequest
-{//Реєстрація пошти
+{
+    // Пошта нового користувача.
     public string Email { get; set; } = string.Empty;
-//HASS PASSWORD
+
+    // Пароль, який прийде від користувача.
+    // У БД напряму не зберігається.
     public string Password { get; set; } = string.Empty;
-//Група
+
+    // Академічна група.
     public string Group { get; set; } = string.Empty;
 }
