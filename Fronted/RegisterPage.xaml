@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -13,189 +14,389 @@
         <map:AuthPageAppearance />
     </ContentPage.Behaviors>
 
-    <Grid BackgroundColor="#140F24"
-          HorizontalOptions="Fill" VerticalOptions="Fill">
-        <ScrollView x:Name="RegisterScrollView"
-                    BackgroundColor="#140F24"
-                    HorizontalOptions="Fill" VerticalOptions="Fill"
-                    HorizontalScrollBarVisibility="Never"
-                    VerticalScrollBarVisibility="Never">
+    <Grid
+        BackgroundColor="#140F24"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
 
-            <!-- Темне тло заповнює всю висоту, вміст починається згори. -->
-            <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference RegisterScrollView}}"
-                  BackgroundColor="Transparent">
+        <ScrollView
+            x:Name="RegisterScrollView"
+            BackgroundColor="#140F24"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never">
+
+            <Grid
+                MinimumHeightRequest="{Binding Height, Source={x:Reference RegisterScrollView}}"
+                BackgroundColor="Transparent">
+
                 <Grid.Padding>
-                    <OnPlatform x:TypeArguments="Thickness" Default="24,12,24,32">
-                        <On Platform="WinUI" Value="32,12,32,32" />
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Default="24,12,24,32">
+
+                        <On
+                            Platform="WinUI"
+                            Value="32,12,32,32" />
+
                     </OnPlatform>
                 </Grid.Padding>
 
                 <map:ResponsiveLoginLayout
-                    HorizontalOptions="Fill" VerticalOptions="Start">
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Start">
 
-                    <Grid HeightRequest="228" Grid.Row="0">
+                    <Grid
+                        HeightRequest="228"
+                        Grid.Row="0">
+
                         <map:AnimatedRegistrationBackground
                             HorizontalOptions="Fill"
                             VerticalOptions="Fill"
                             MapZoom="1.20"
                             InputTransparent="True" />
 
-                        <!-- М'яке затемнення нижнього краю карти. -->
-                        <Border StrokeThickness="0" InputTransparent="True">
+                        <Border
+                            StrokeThickness="0"
+                            InputTransparent="True">
+
                             <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                    <GradientStop Color="#00140F24" Offset="0" />
-                                    <GradientStop Color="#00140F24" Offset="0.68" />
-                                    <GradientStop Color="#FF140F24" Offset="1" />
+
+                                <LinearGradientBrush
+                                    StartPoint="0,0"
+                                    EndPoint="0,1">
+
+                                    <GradientStop
+                                        Color="#00140F24"
+                                        Offset="0" />
+
+                                    <GradientStop
+                                        Color="#00140F24"
+                                        Offset="0.68" />
+
+                                    <GradientStop
+                                        Color="#FF140F24"
+                                        Offset="1" />
+
                                 </LinearGradientBrush>
+
                             </Border.Background>
+
                         </Border>
 
-                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12"
-                              VerticalOptions="Start" Margin="0,4,0,0">
-                            <Border StrokeThickness="0" StrokeShape="RoundRectangle 14"
-                                    BackgroundColor="Transparent" Padding="0">
+                        <Grid
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="12"
+                            VerticalOptions="Start"
+                            Margin="0,4,0,0">
+
+                            <Border
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 14"
+                                BackgroundColor="Transparent"
+                                Padding="0">
+
                                 <Border.WidthRequest>
-                                    <OnPlatform x:TypeArguments="x:Double" Default="52">
-                                        <On Platform="WinUI" Value="72" />
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="52">
+
+                                        <On
+                                            Platform="WinUI"
+                                            Value="72" />
+
                                     </OnPlatform>
                                 </Border.WidthRequest>
+
                                 <Border.HeightRequest>
-                                    <OnPlatform x:TypeArguments="x:Double" Default="52">
-                                        <On Platform="WinUI" Value="72" />
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="52">
+
+                                        <On
+                                            Platform="WinUI"
+                                            Value="72" />
+
                                     </OnPlatform>
                                 </Border.HeightRequest>
-                                <Image Source="logo_transparent.png" Aspect="AspectFit" />
+
+                                <Image
+                                    Source="logo_transparent.png"
+                                    Aspect="AspectFit" />
+
                             </Border>
-                            <Label Grid.Column="1" Text="LNU maps"
-                                   FontFamily="OpenSansSemibold"
-                                   FontAttributes="Bold"
-                                   TextColor="White" CharacterSpacing="0.3"
-                                   VerticalOptions="Center">
+
+                            <Label
+                                Grid.Column="1"
+                                Text="LNU maps"
+                                FontFamily="OpenSansSemibold"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                CharacterSpacing="0.3"
+                                VerticalOptions="Center">
+
                                 <Label.FontSize>
-                                    <OnPlatform x:TypeArguments="x:Double" Default="24">
-                                        <On Platform="WinUI" Value="28" />
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Default="24">
+
+                                        <On
+                                            Platform="WinUI"
+                                            Value="28" />
+
                                     </OnPlatform>
                                 </Label.FontSize>
+
                             </Label>
+
                         </Grid>
+
                     </Grid>
 
-                    <Border Grid.Row="1"
-                            StrokeThickness="0" Stroke="Transparent"
-                            StrokeShape="RoundRectangle 24"
-                            BackgroundColor="Transparent">
-                        <VerticalStackLayout Spacing="0">
-                            <Label Text="Створити акаунт"
-                                   FontFamily="OpenSansSemibold"
-                                   FontSize="32" FontAttributes="Bold"
-                                   TextColor="White" LineBreakMode="WordWrap"
-                                   Margin="0,6,0,0" />
-                            <Label Text="Зареєструйтеся, щоб переглядати свій розклад."
-                                   FontSize="15" TextColor="#C4BDCF"
-                                   LineBreakMode="WordWrap" Margin="0,8,0,12" />
+                    <Border
+                        Grid.Row="1"
+                        StrokeThickness="0"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 24"
+                        BackgroundColor="Transparent">
 
-                            <!-- Спільний логотип реагує на всі поля реєстрації. -->
-                            <map:AnimatedLoginLogo LogoSource="logo_transparent.png"
+                        <VerticalStackLayout Spacing="0">
+
+                            <Label
+                                Text="Створити акаунт"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="32"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                LineBreakMode="WordWrap"
+                                Margin="0,6,0,0" />
+
+                            <Label
+                                Text="Зареєструйтеся, щоб переглядати свій розклад."
+                                FontSize="15"
+                                TextColor="#C4BDCF"
+                                LineBreakMode="WordWrap"
+                                Margin="0,8,0,12" />
+
+                            <map:AnimatedLoginLogo
+                                LogoSource="logo_transparent.png"
                                 IsRegistrationAnimation="True"
-                                WidthRequest="200" HeightRequest="150"
-                                HorizontalOptions="Center" Margin="0,0,0,8"
+                                WidthRequest="200"
+                                HeightRequest="150"
+                                HorizontalOptions="Center"
+                                Margin="0,0,0,8"
+
                                 EmailLength="{Binding Text.Length, Source={x:Reference RegisterEmailEntry}, FallbackValue=0, TargetNullValue=0}"
+
                                 GroupLength="{Binding Text.Length, Source={x:Reference RegisterGroupEntry}, FallbackValue=0, TargetNullValue=0}"
+
                                 PasswordLength="{Binding Text.Length, Source={x:Reference RegisterPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+
                                 ConfirmPasswordLength="{Binding Text.Length, Source={x:Reference RegisterConfirmPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+
                                 IsEmailFocused="{Binding IsFocused, Source={x:Reference RegisterEmailEntry}}"
+
                                 IsGroupFocused="{Binding IsFocused, Source={x:Reference RegisterGroupEntry}}"
+
                                 IsPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterPasswordEntry}}"
+
                                 IsConfirmPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterConfirmPasswordEntry}}"
+
                                 IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}}"
+
                                 IsConfirmPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}}" />
 
-                            <Label Text="Електронна пошта" FontSize="14"
-                                   FontAttributes="Bold" TextColor="White"
-                                   Margin="0,0,0,8" />
-                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
-                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
-                                    HeightRequest="56">
-                                <Entry x:Name="RegisterEmailEntry"
-                                       Placeholder="Введіть електронну пошту"
-                                       PlaceholderColor="#B8AFC6" TextColor="White"
-                                       FontSize="15" Keyboard="Email"
-                                       Margin="14,0" BackgroundColor="Transparent" />
+                            <!-- EMAIL -->
+
+                            <Label
+                                Text="Електронна пошта"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,0,0,8" />
+
+                            <Border
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
+                                <Entry
+                                    x:Name="RegisterEmailEntry"
+                                    Placeholder="Введіть електронну пошту"
+                                    PlaceholderColor="#B8AFC6"
+                                    TextColor="White"
+                                    FontSize="15"
+                                    Keyboard="Email"
+                                    Margin="14,0"
+                                    BackgroundColor="Transparent" />
+
                             </Border>
 
-                            <Label Text="Група" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" Margin="0,22,0,8" />
-                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
-                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
-                                    HeightRequest="56">
-                                <Entry x:Name="RegisterGroupEntry"
-                                       Placeholder="Введіть назву групи"
-                                       PlaceholderColor="#B8AFC6" TextColor="White"
-                                       FontSize="15" Margin="14,0"
-                                       BackgroundColor="Transparent" />
+                            <!-- GROUP -->
+
+                            <Label
+                                Text="Група"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,22,0,8" />
+
+                            <Border
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
+                                <Entry
+                                    x:Name="RegisterGroupEntry"
+                                    Placeholder="Введіть назву групи"
+                                    PlaceholderColor="#B8AFC6"
+                                    TextColor="White"
+                                    FontSize="15"
+                                    Margin="14,0"
+                                    BackgroundColor="Transparent" />
+
                             </Border>
 
-                            <Label Text="Пароль" FontSize="14" FontAttributes="Bold"
-                                   TextColor="White" Margin="0,22,0,8" />
-                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
-                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
-                                    HeightRequest="56">
+                            <!-- PASSWORD -->
+
+                            <Label
+                                Text="Пароль"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,22,0,8" />
+
+                            <Border
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Entry x:Name="RegisterPasswordEntry"
-                                           Placeholder="Введіть пароль"
-                                           PlaceholderColor="#B8AFC6" TextColor="White"
-                                           FontSize="15" Margin="14,0" IsPassword="True"
-                                           BackgroundColor="Transparent" />
-                                    <map:PasswordRevealButton Grid.Column="1"
-                                        HeightRequest="44" Margin="0,6,8,6"
+
+                                    <Entry
+                                        x:Name="RegisterPasswordEntry"
+                                        Placeholder="Введіть пароль"
+                                        PlaceholderColor="#B8AFC6"
+                                        TextColor="White"
+                                        FontSize="15"
+                                        Margin="14,0"
+                                        IsPassword="True"
+                                        BackgroundColor="Transparent" />
+
+                                    <map:PasswordRevealButton
+                                        Grid.Column="1"
+                                        HeightRequest="44"
+                                        Margin="0,6,8,6"
                                         IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}, Mode=TwoWay}" />
+
                                 </Grid>
+
                             </Border>
 
-                            <Label Text="Повторіть пароль" FontSize="14"
-                                   FontAttributes="Bold" TextColor="White"
-                                   Margin="0,22,0,8" />
-                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
-                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
-                                    HeightRequest="56">
+                            <!-- CONFIRM PASSWORD -->
+
+                            <Label
+                                Text="Повторіть пароль"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                Margin="0,22,0,8" />
+
+                            <Border
+                                BackgroundColor="#211A33"
+                                Stroke="#5D4B79"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 16"
+                                HeightRequest="56">
+
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Entry x:Name="RegisterConfirmPasswordEntry"
-                                           Placeholder="Введіть пароль ще раз"
-                                           PlaceholderColor="#B8AFC6" TextColor="White"
-                                           FontSize="15" Margin="14,0" IsPassword="True"
-                                           BackgroundColor="Transparent" />
-                                    <map:PasswordRevealButton Grid.Column="1"
-                                        HeightRequest="44" Margin="0,6,8,6"
+
+                                    <Entry
+                                        x:Name="RegisterConfirmPasswordEntry"
+                                        Placeholder="Введіть пароль ще раз"
+                                        PlaceholderColor="#B8AFC6"
+                                        TextColor="White"
+                                        FontSize="15"
+                                        Margin="14,0"
+                                        IsPassword="True"
+                                        BackgroundColor="Transparent" />
+
+                                    <map:PasswordRevealButton
+                                        Grid.Column="1"
+                                        HeightRequest="44"
+                                        Margin="0,6,8,6"
                                         IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}, Mode=TwoWay}" />
+
                                 </Grid>
+
                             </Border>
 
-                            <Button x:Name="RegisterButton" Text="Зареєструватися"
-                                    Margin="0,28,0,0" HeightRequest="56" CornerRadius="16"
-                                    BackgroundColor="White" BorderColor="White"
-                                    TextColor="#140F24" FontSize="16"
-                                    FontAttributes="Bold" />
+                            <!-- REGISTER -->
 
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6"
-                                  Margin="0,20,0,0">
-                                <Label Text="Вже маєш акаунт?" FontSize="13"
-                                       TextColor="#C4BDCF"
-                                       HorizontalTextAlignment="End"
-                                       VerticalOptions="Center" />
-                                <Label Grid.Column="1" Text="Увійти" FontSize="13"
-                                       FontAttributes="Bold" TextColor="White"
-                                       TextDecorations="Underline"
-                                       VerticalOptions="Center">
+                            <Button
+                                x:Name="RegisterButton"
+                                Text="Зареєструватися"
+                                Margin="0,28,0,0"
+                                HeightRequest="56"
+                                CornerRadius="16"
+                                BackgroundColor="White"
+                                BorderColor="White"
+                                TextColor="#140F24"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                Clicked="OnRegisterClicked" />
+
+                            <!-- LOGIN -->
+
+                            <Grid
+                                ColumnDefinitions="*,*"
+                                ColumnSpacing="6"
+                                Margin="0,20,0,0">
+
+                                <Label
+                                    Text="Вже маєш акаунт?"
+                                    FontSize="13"
+                                    TextColor="#C4BDCF"
+                                    HorizontalTextAlignment="End"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="Увійти"
+                                    FontSize="13"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    TextDecorations="Underline"
+                                    VerticalOptions="Center">
+
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnBackToLoginTapped" />
+
+                                        <TapGestureRecognizer
+                                            Tapped="OnBackToLoginTapped" />
+
                                     </Label.GestureRecognizers>
+
                                 </Label>
+
                             </Grid>
+
                         </VerticalStackLayout>
+
                     </Border>
+
                 </map:ResponsiveLoginLayout>
+
             </Grid>
+
         </ScrollView>
+
     </Grid>
+
 </ContentPage>
