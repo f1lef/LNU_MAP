@@ -8,11 +8,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-<<<<<<< HEAD
-// Додаємо підтримку контролерів.
-// Додаємо підтримку контролерів.
-builder.Services.AddControllers();
-=======
 
 //  CONTROLLERS 
 
@@ -24,7 +19,6 @@ builder.Services.AddControllers();
 //  OPENAPI 
 
 builder.Services.AddOpenApi();
->>>>>>> origin/feature/database-setup
 
 
 //  DATABASE 
@@ -99,11 +93,6 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-<<<<<<< HEAD
-// Підключаємо адреси, описані в контролерах.
-app.MapControllers();
-
-=======
 
 // OpenAPI працює тільки в Development.
 if (app.Environment.IsDevelopment())
@@ -133,5 +122,4 @@ app.MapControllers();
 
 // Запускаємо API.
 
->>>>>>> origin/feature/database-setup
 app.Run();
