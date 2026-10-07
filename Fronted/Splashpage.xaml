@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Fronted.SplashPage"
+             BackgroundColor="#F8F8FC"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto,*" Padding="40">
+
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="20"
+                             HorizontalOptions="Center">
+
+            <!-- Логотип -->
+            <Image x:Name="LogoImage"
+                   Source="logo_transparent.png"
+                   WidthRequest="160"
+                   HeightRequest="160"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   Opacity="0"
+                   Scale="0.8" />
+
+            <!-- Назва -->
+            <Label x:Name="TitleLabel"
+                   Text="LNU maps"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#63409A"
+                   HorizontalOptions="Center"
+                   Opacity="0" />
+
+            <!-- Смужка завантаження -->
+            <ProgressBar x:Name="LoadingBar"
+                         Progress="0"
+                         ProgressColor="#63409A"
+                         BackgroundColor="#E4DAF5"
+                         WidthRequest="240"
+                         HeightRequest="8"
+                         Margin="0,30,0,0"
+                         HorizontalOptions="Center"
+                         Opacity="0" />
+
+            <!-- Статус -->
+            <Label x:Name="StatusLabel"
+                   Text="Запуск..."
+                   FontSize="14"
+                   TextColor="#7A7F99"
+                   HorizontalOptions="Center"
+                   Opacity="0" />
+        </VerticalStackLayout>
+
+        <Label Grid.Row="2"
+               Text="Львівський національний університет імені Івана Франка"
+               FontSize="12"
+               TextColor="#A6A9BD"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="End" />
+    </Grid>
+</ContentPage>

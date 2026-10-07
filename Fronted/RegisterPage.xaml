@@ -1,9 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:map="clr-namespace:Fronted"
-    x:Class="Fronted.MainPage"
+    x:Class="Fronted.RegisterPage"
+    Title="Реєстрація"
     Shell.NavBarIsVisible="False"
     BackgroundColor="#140F24"
     Padding="0">
@@ -14,14 +15,14 @@
 
     <Grid BackgroundColor="#140F24"
           HorizontalOptions="Fill" VerticalOptions="Fill">
-        <ScrollView x:Name="LoginScrollView"
+        <ScrollView x:Name="RegisterScrollView"
                     BackgroundColor="#140F24"
                     HorizontalOptions="Fill" VerticalOptions="Fill"
                     HorizontalScrollBarVisibility="Never"
                     VerticalScrollBarVisibility="Never">
 
             <!-- Темне тло заповнює всю висоту, вміст починається згори. -->
-            <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference LoginScrollView}}"
+            <Grid MinimumHeightRequest="{Binding Height, Source={x:Reference RegisterScrollView}}"
                   BackgroundColor="Transparent">
                 <Grid.Padding>
                     <OnPlatform x:TypeArguments="Thickness" Default="24,12,24,32">
@@ -33,7 +34,7 @@
                     HorizontalOptions="Fill" VerticalOptions="Start">
 
                     <Grid HeightRequest="228" Grid.Row="0">
-                        <map:AnimatedMapBackground
+                        <map:AnimatedRegistrationBackground
                             HorizontalOptions="Fill"
                             VerticalOptions="Fill"
                             MapZoom="1.20"
@@ -85,84 +86,112 @@
                             StrokeShape="RoundRectangle 24"
                             BackgroundColor="Transparent">
                         <VerticalStackLayout Spacing="0">
-                            <Label Text="Вхід" FontFamily="OpenSansSemibold"
-                                   FontSize="40" FontAttributes="Bold"
-                                   TextColor="White" Margin="0,6,0,0" />
-                            <Label Text="Розклад і маршрут до аудиторії — в одному місці."
+                            <Label Text="Створити акаунт"
+                                   FontFamily="OpenSansSemibold"
+                                   FontSize="32" FontAttributes="Bold"
+                                   TextColor="White" LineBreakMode="WordWrap"
+                                   Margin="0,6,0,0" />
+                            <Label Text="Зареєструйтеся, щоб переглядати свій розклад."
                                    FontSize="15" TextColor="#C4BDCF"
                                    LineBreakMode="WordWrap" Margin="0,8,0,12" />
 
-                            <!-- Ваш логотип рухається під час введення й прикривається при показі пароля. -->
+                            <!-- Спільний логотип реагує на всі поля реєстрації. -->
                             <map:AnimatedLoginLogo LogoSource="logo_transparent.png"
+                                IsRegistrationAnimation="True"
                                 WidthRequest="200" HeightRequest="150"
                                 HorizontalOptions="Center" Margin="0,0,0,8"
-                                EmailLength="{Binding Text.Length, Source={x:Reference EmailEntry}, FallbackValue=0, TargetNullValue=0}"
-                                PasswordLength="{Binding Text.Length, Source={x:Reference PasswordEntry}, FallbackValue=0, TargetNullValue=0}"
-                                IsEmailFocused="{Binding IsFocused, Source={x:Reference EmailEntry}}"
-                                IsPasswordFocused="{Binding IsFocused, Source={x:Reference PasswordEntry}}"
-                                IsPasswordHidden="{Binding IsPassword, Source={x:Reference PasswordEntry}}" />
+                                EmailLength="{Binding Text.Length, Source={x:Reference RegisterEmailEntry}, FallbackValue=0, TargetNullValue=0}"
+                                GroupLength="{Binding Text.Length, Source={x:Reference RegisterGroupEntry}, FallbackValue=0, TargetNullValue=0}"
+                                PasswordLength="{Binding Text.Length, Source={x:Reference RegisterPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+                                ConfirmPasswordLength="{Binding Text.Length, Source={x:Reference RegisterConfirmPasswordEntry}, FallbackValue=0, TargetNullValue=0}"
+                                IsEmailFocused="{Binding IsFocused, Source={x:Reference RegisterEmailEntry}}"
+                                IsGroupFocused="{Binding IsFocused, Source={x:Reference RegisterGroupEntry}}"
+                                IsPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterPasswordEntry}}"
+                                IsConfirmPasswordFocused="{Binding IsFocused, Source={x:Reference RegisterConfirmPasswordEntry}}"
+                                IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}}"
+                                IsConfirmPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}}" />
 
                             <Label Text="Електронна пошта" FontSize="14"
                                    FontAttributes="Bold" TextColor="White"
                                    Margin="0,0,0,8" />
-                            <Border x:Name="EmailBorder"
-                                    BackgroundColor="#211A33" Stroke="#5D4B79"
+                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
                                     StrokeThickness="1" StrokeShape="RoundRectangle 16"
                                     HeightRequest="56">
-                                <Entry x:Name="EmailEntry" Placeholder="name@lnu.edu.ua"
+                                <Entry x:Name="RegisterEmailEntry"
+                                       Placeholder="Введіть електронну пошту"
                                        PlaceholderColor="#B8AFC6" TextColor="White"
                                        FontSize="15" Keyboard="Email"
                                        Margin="14,0" BackgroundColor="Transparent" />
                             </Border>
-                            <Label x:Name="EmailErrorLabel" Text="Введіть електронну пошту"
-                                   FontSize="12" TextColor="#FF8B9A"
-                                   Margin="0,6,0,0" IsVisible="False" />
+
+                            <Label Text="Група" FontSize="14" FontAttributes="Bold"
+                                   TextColor="White" Margin="0,22,0,8" />
+                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
+                                    HeightRequest="56">
+                                <Entry x:Name="RegisterGroupEntry"
+                                       Placeholder="Введіть назву групи"
+                                       PlaceholderColor="#B8AFC6" TextColor="White"
+                                       FontSize="15" Margin="14,0"
+                                       BackgroundColor="Transparent" />
+                            </Border>
 
                             <Label Text="Пароль" FontSize="14" FontAttributes="Bold"
                                    TextColor="White" Margin="0,22,0,8" />
-                            <Border x:Name="PasswordBorder"
-                                    BackgroundColor="#211A33" Stroke="#5D4B79"
+                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
                                     StrokeThickness="1" StrokeShape="RoundRectangle 16"
                                     HeightRequest="56">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <Entry x:Name="PasswordEntry" Placeholder="Ваш пароль"
+                                    <Entry x:Name="RegisterPasswordEntry"
+                                           Placeholder="Введіть пароль"
                                            PlaceholderColor="#B8AFC6" TextColor="White"
                                            FontSize="15" Margin="14,0" IsPassword="True"
                                            BackgroundColor="Transparent" />
                                     <map:PasswordRevealButton Grid.Column="1"
                                         HeightRequest="44" Margin="0,6,8,6"
-                                        IsPasswordHidden="{Binding IsPassword, Source={x:Reference PasswordEntry}, Mode=TwoWay}" />
+                                        IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterPasswordEntry}, Mode=TwoWay}" />
                                 </Grid>
                             </Border>
-                            <Label x:Name="PasswordErrorLabel" Text="Введіть пароль"
-                                   FontSize="12" TextColor="#FF8B9A"
-                                   Margin="0,6,0,0" IsVisible="False" />
-                            <Label x:Name="LoginErrorLabel"
-                                   Text="Неправильна електронна пошта або пароль."
-                                   TextColor="#FF8B9A" FontSize="13"
-                                   Margin="0,18,0,0" IsVisible="False" />
 
-                            <Button x:Name="LoginButton" Text="Увійти"
+                            <Label Text="Повторіть пароль" FontSize="14"
+                                   FontAttributes="Bold" TextColor="White"
+                                   Margin="0,22,0,8" />
+                            <Border BackgroundColor="#211A33" Stroke="#5D4B79"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 16"
+                                    HeightRequest="56">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Entry x:Name="RegisterConfirmPasswordEntry"
+                                           Placeholder="Введіть пароль ще раз"
+                                           PlaceholderColor="#B8AFC6" TextColor="White"
+                                           FontSize="15" Margin="14,0" IsPassword="True"
+                                           BackgroundColor="Transparent" />
+                                    <map:PasswordRevealButton Grid.Column="1"
+                                        HeightRequest="44" Margin="0,6,8,6"
+                                        IsPasswordHidden="{Binding IsPassword, Source={x:Reference RegisterConfirmPasswordEntry}, Mode=TwoWay}" />
+                                </Grid>
+                            </Border>
+
+                            <Button x:Name="RegisterButton" Text="Зареєструватися"
                                     Margin="0,28,0,0" HeightRequest="56" CornerRadius="16"
                                     BackgroundColor="White" BorderColor="White"
-                                    TextColor="#140F24" FontSize="16" FontAttributes="Bold"
-                                    Clicked="OnLoginClicked" />
+                                    TextColor="#140F24" FontSize="16"
+                                    FontAttributes="Bold" />
 
-                            <!-- Grid дозволяє тексту переноситися на вузькому екрані. -->
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6" Margin="0,20,0,0">
-                                <Label Text="Немає акаунта?" FontSize="13" TextColor="#C4BDCF"
-                                       HorizontalTextAlignment="End" VerticalOptions="Center" />
-                                <Label Grid.Column="1" Text="Зареєструватися" FontSize="13"
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6"
+                                  Margin="0,20,0,0">
+                                <Label Text="Вже маєш акаунт?" FontSize="13"
+                                       TextColor="#C4BDCF"
+                                       HorizontalTextAlignment="End"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="Увійти" FontSize="13"
                                        FontAttributes="Bold" TextColor="White"
-                                       TextDecorations="Underline" LineBreakMode="WordWrap"
+                                       TextDecorations="Underline"
                                        VerticalOptions="Center">
                                     <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnRegisterTapped" />
+                                        <TapGestureRecognizer Tapped="OnBackToLoginTapped" />
                                     </Label.GestureRecognizers>
                                 </Label>
                             </Grid>
-                            <ActivityIndicator x:Name="LoadingIndicator" Margin="0,16,0,0"
-                                               Color="White" IsVisible="False" IsRunning="False" />
                         </VerticalStackLayout>
                     </Border>
                 </map:ResponsiveLoginLayout>

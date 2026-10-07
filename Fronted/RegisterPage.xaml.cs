@@ -1,11 +1,10 @@
-﻿using System;
 using Microsoft.Maui.Controls;
 
 namespace Fronted;
 
-public partial class MainPage : ContentPage
+public partial class RegisterPage : ContentPage
 {
-    public MainPage()
+    public RegisterPage()
     {
         InitializeComponent();
     }
@@ -19,13 +18,14 @@ public partial class MainPage : ContentPage
 
         pageContent.AbortAnimation("PageTransition");
 
+        // Початковий стан: прозоро і трохи правіше
         pageContent.Opacity = 0;
-        pageContent.TranslationX = -40;
+        pageContent.TranslationX = 40;
 
         var animation = new Animation(progress =>
         {
             pageContent.Opacity = progress;
-            pageContent.TranslationX = -40 * (1 - progress);
+            pageContent.TranslationX = 40 * (1 - progress);
         }, 0, 1);
 
         animation.Commit(
@@ -39,16 +39,9 @@ public partial class MainPage : ContentPage
                 pageContent.TranslationX = 0;
             });
     }
-    private async void OnLoginClicked(object? sender, EventArgs e)
+    private async void OnBackToLoginTapped(
+        object? sender, TappedEventArgs e)
     {
-        await DisplayAlertAsync(
-            "Вхід",
-            "Успішний вхід, вітаємо тебе першокурснику!",
-            "OK");
-    }
-
-    private async void OnRegisterTapped(object? sender, TappedEventArgs e)
-    {
-        await Navigation.PushModalAsync(new RegisterPage(), false);
+        await Navigation.PopModalAsync();
     }
 }
