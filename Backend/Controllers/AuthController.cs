@@ -48,6 +48,66 @@ public class AuthController : ControllerBase
 
     // Цей метод буде викликатися через:
     // POST /api/auth/login
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterRequest request)
+    {
+        // Перевіряємо, чи всі поля заповнені.
+        if (string.IsNullOrWhiteSpace(request.Email) ||
+            string.IsNullOrWhiteSpace(request.Password) ||
+            string.IsNullOrWhiteSpace(request.Group))
+        {
+            return BadRequest(new
+            {
+                message = "Email, password і group є обов'язковими."
+            });
+        }
+
+        // Нормалізуємо email.
+        string email = request.Email
+            .Trim()
+            .ToLowerInvariant();
+
+        // Перевіряємо, чи такий email уже є в базі.
+        bool emailExists = await _context.Users
+            .AnyAsync(u => u.Email == email);
+
+        if (emailExists)
+        {
+            return BadRequest(new
+            {
+                message = "Користувач з такою поштою вже існує."
+            });
+        }
+
+        // Створюємо нового користувача.
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = email,
+            Group = request.Group.Trim(),
+            PasswordHash = string.Empty
+        };
+
+        // Хешуємо пароль.
+        user.PasswordHash =
+            _passwordHasher.HashPassword(
+                user,
+                request.Password);
+
+        // Додаємо користувача в PostgreSQL.
+        _context.Users.Add(user);
+
+        await _context.SaveChangesAsync();
+
+        // Повертаємо 201 Created.
+        return StatusCode(201, new
+        {
+            message = "Користувача успішно зареєстровано.",
+            userId = user.Id,
+            email = user.Email,
+            group = user.Group
+        });
+    }
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {

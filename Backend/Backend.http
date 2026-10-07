@@ -1,7 +1,9 @@
-POST http://localhost:5147/api/auth/login
+### REGISTER
+POST http://localhost:5147/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
-  "password": "Test123!"
+  "email": "student@test.com",
+  "password": "Test123!",
+  "group": "PMK-13"
 }
